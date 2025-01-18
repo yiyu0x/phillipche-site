@@ -1,37 +1,51 @@
 import { useSpotify } from '../hooks/useSpotify';
+import { Spotify } from 'react-spotify-embed';
 
 const SpotifyNowPlaying = () => {
-  const { currentTrack } = useSpotify();
+  const { currentTrack, recentTracks } = useSpotify();
+
+  if (!currentTrack && !recentTracks?.length) {
+    return null;
+  }
 
   return (
-    <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-md dark:bg-[#111828]">
-      <div className="flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden shadow-lg">
-      {currentTrack ? (
-          <img
-            src={currentTrack.albumImageUrl}
-            alt={currentTrack.album}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div className="w-full h-full bg-gray-100 dark:bg-gray-900 animate-pulse rounded-xl" />
-        )}
-      </div>
+    <div className="p-4 space-y-4">
+      <h2 className="text-xl font-semibold text-[#111828] dark:text-white mb-4">
+        {currentTrack ? 'Now Playing' : 'Recently Played'}
+      </h2>
       
-      <div className="min-w-0 flex-1">
-      <h3 className="text-lg font-semibold truncate text-[#111828] dark:text-white">
-      {currentTrack?.name || 'Not Playing'}
-        </h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
-          {currentTrack?.artist || 'Spotify'}
-        </p>
-      </div>
+      <div className="flex flex-col md:flex-row gap-4">
+        {/* Current Track or Most Recent Track */}
+        <div className="md:w-1/2">
+          {currentTrack ? (
+            <Spotify 
+              
+              link={currentTrack.spotifyUrl} 
+            />
+          ) : (
+            recentTracks?.[0] && (
+              <Spotify 
+                wide
+                link={recentTracks[0].spotifyUrl} 
+              />
+            )
+          )}
+        </div>
 
-      <div className="flex-shrink-0 w-5 h-5 flex items-end space-x-1">
-        <div className="w-1 h-4 bg-[#1DB954] animate-wave" />
-        <div className="w-1 h-6 bg-[#1DB954] animate-wave" />
-        <div className="w-1 h-5 bg-[#1DB954] animate-wave" />
+        {/* Recent Tracks */}
+        <div className="md:w-1/2 flex flex-col space-y-4">
+          {recentTracks
+            ?.slice(currentTrack ? 0 : 1, currentTrack ? 4 : 5)
+            .map((track) => (
+              <Spotify 
+                key={track.id}
+                wide
+                link={track.spotifyUrl}
+              />
+            ))}
+        </div>
       </div>
-  </div>
+    </div>
   );
 };
 

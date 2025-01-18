@@ -13,6 +13,9 @@ export const useSpotifyAuth = () => {
       getAccessToken().then((data) => {
         setToken(data.access_token);
       })
+      .catch((error) => {
+        console.error('Error fetching Spotify access token:', error);
+      });
     }
   }, []);
 

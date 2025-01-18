@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSpotifyAuth } from './useSpotifyAuth';
 
-interface SpotifyTrack {
+interface Track {
+  id: string;
   name: string;
   artist: string;
   album: string;
   albumImageUrl: string;
+  spotifyUrl: string;
 }
 
 declare global {
@@ -16,8 +18,9 @@ declare global {
   }
 }
 
-export const useSpotify = () => {
-  const [currentTrack, setCurrentTrack] = useState<SpotifyTrack | null>(null);
+export function useSpotify() {
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
+  const [recentTracks, setRecentTracks] = useState<Track[]>([]);
   const { token } = useSpotifyAuth();
 
   useEffect(() => {
@@ -39,10 +42,12 @@ export const useSpotify = () => {
         const track = response.data.item;
         if (track) {
           setCurrentTrack({
+            id: track.id,
             name: track.name,
             artist: track.artists.map((artist: { name: string }) => artist.name).join(', '),
             album: track.album.name,
             albumImageUrl: track.album.images[0].url,
+            spotifyUrl: track.external_urls.spotify,
           });
         }
       } catch (error) {
@@ -62,5 +67,43 @@ export const useSpotify = () => {
     };
   }, [token]);
 
-  return { currentTrack };
-}; 
+  // Add logic to fetch recent tracks
+  useEffect(() => {
+    if (!token) return;
+
+    const fetchRecentTracks = async () => {
+      try {
+        const response = await axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=5', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (response.data && response.data.items) {
+          const tracks = response.data.items.map((item: any) => ({
+            id: item.track.id,
+            name: item.track.name,
+            artist: item.track.artists.map((artist: { name: string }) => artist.name).join(', '),
+            album: item.track.album.name,
+            albumImageUrl: item.track.album.images[0].url,
+            spotifyUrl: item.track.external_urls.spotify,
+          }));
+          setRecentTracks(tracks);
+        }
+      } catch (error) {
+        console.error('Error fetching recent tracks:', error);
+      }
+    };
+
+    fetchRecentTracks();
+    // Fetch recent tracks every minute
+    const interval = setInterval(fetchRecentTracks, 60000);
+
+    return () => clearInterval(interval);
+  }, [token]);
+
+  return {
+    currentTrack,
+    recentTracks,
+  };
+} 
