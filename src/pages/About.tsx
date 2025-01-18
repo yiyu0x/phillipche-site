@@ -72,7 +72,6 @@ const About = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <h2 className="text-2xl font-semibold">Latest Content</h2>
         <YouTubeLatest />
       </motion.section>
     </div>

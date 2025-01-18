@@ -1,47 +1,46 @@
 import { useSpotify } from '../hooks/useSpotify';
 import { Spotify } from 'react-spotify-embed';
+import FadeIn from './FadeIn';
 
-const SpotifyNowPlaying = () => {
+const SpotifyPlaying = () => {
   const { currentTrack, recentTracks } = useSpotify();
 
-  if (!currentTrack && !recentTracks?.length) {
-    return null;
-  }
-
   return (
-    <div className="p-4 space-y-4">
-      <h2 className="text-xl font-semibold text-[#111828] dark:text-white mb-4">
-        {currentTrack ? 'Now Playing' : 'Recently Played'}
-      </h2>
-      
-      <div className="flex flex-col md:flex-row gap-4">
+    <div className="space-y-4">
+      <FadeIn>
+        <h2 className="text-xl font-semibold text-[#111828] dark:text-white mb-4">
+          {currentTrack ? 'Now Playing' : 'Recently Played'}
+        </h2>
+      </FadeIn>
+      <div className="flex flex-col md:flex-row">
         {/* Current Track or Most Recent Track */}
         <div className="md:w-1/2">
+          <FadeIn>
           {currentTrack ? (
-            <Spotify 
-              
-              link={currentTrack.spotifyUrl} 
-            />
+              <Spotify 
+                link={currentTrack.spotifyUrl} 
+              />
           ) : (
             recentTracks?.[0] && (
-              <Spotify 
-                wide
-                link={recentTracks[0].spotifyUrl} 
-              />
+                <Spotify 
+                  link={recentTracks[0].spotifyUrl} 
+                />
             )
           )}
+          </FadeIn>
         </div>
 
         {/* Recent Tracks */}
         <div className="md:w-1/2 flex flex-col space-y-4">
           {recentTracks
             ?.slice(currentTrack ? 0 : 1, currentTrack ? 4 : 5)
-            .map((track) => (
-              <Spotify 
-                key={track.id}
-                wide
-                link={track.spotifyUrl}
-              />
+            .map((track, index) => (
+              <FadeIn key={track.id} delay={1 + index * 0.2}>
+                <Spotify 
+                  wide
+                  link={track.spotifyUrl}
+                />
+              </FadeIn>
             ))}
         </div>
       </div>
@@ -49,4 +48,4 @@ const SpotifyNowPlaying = () => {
   );
 };
 
-export default SpotifyNowPlaying; 
+export default SpotifyPlaying; 

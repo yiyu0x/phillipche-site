@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import SpotifyNowPlaying from '../components/SpotifyNowPlaying';
+import SpotifyPlaying from '../components/SpotifyNowPlaying';
 import YouTubeLatest from '../components/YouTubeLatest';
 
 const Home = () => {
   return (
-    <div className="space-y-16">
+    <div>
       {/* Hero Section */}
       <section className="space-y-6">
         <motion.h1 
@@ -27,26 +27,25 @@ const Home = () => {
 
       {/* Latest Content Section */}
       <motion.section 
-        className="space-y-8"
+        className="space-y-1"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <h2 className="text-2xl font-semibold">Latest Video</h2>
-        <div className="card p-4">
+        <div className="card p-0 py-4">
           <YouTubeLatest />
         </div>
       </motion.section>
 
-      {/* Now Playing Section */}
+      {/* Spotify Section */}
       <motion.section
-        className="space-y-8"
+        className="mt-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <div className="card p-4">
-          <SpotifyNowPlaying />
+        <div className="card">
+          <SpotifyPlaying />
         </div>
       </motion.section>
     </div>

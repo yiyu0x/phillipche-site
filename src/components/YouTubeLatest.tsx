@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import VideoCarousel from './VideoCarousel';
+import FadeIn from './FadeIn';
 
 interface YouTubeVideo {
   id: string;
@@ -9,14 +10,16 @@ interface YouTubeVideo {
   publishedAt: string;
 }
 
-const YouTubeLatest = () => {
+const   YouTubeLatest = () => {
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
   const CHANNEL_ID = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
 
   useEffect(() => {
     const fetchVideos = async () => {
+      setLoading(true);
       try {
         const channelResponse = await axios.get(
           `https://www.googleapis.com/youtube/v3/channels?key=${YOUTUBE_API_KEY}&id=${CHANNEL_ID}&part=contentDetails`
@@ -61,36 +64,63 @@ const YouTubeLatest = () => {
         setVideos(longFormVideos);
       } catch (error) {
         console.error('Error fetching YouTube data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchVideos();
   }, [YOUTUBE_API_KEY, CHANNEL_ID]);
 
-  if (!videos.length) return null;
+  // Show loading skeleton until we have videos
+  if (loading || !videos.length) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-2xl font-semibold pb-2">Latest Video</h2>
+          <div className="aspect-video rounded-xl overflow-hidden">
+            <div className="w-full h-full bg-gray-200 dark:bg-gray-800 animate-pulse" />
+          </div>
+        </div>
+        
+        {/* Previous Videos Loading State */}
+        <div className="grid grid-cols-4 gap-3">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div 
+              key={index}
+              className="aspect-video rounded-lg bg-gray-200 dark:bg-gray-800 animate-pulse"
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   const [latestVideo, ...previousVideos] = videos;
 
   return (
-    <div className="space-y-6">
-      {/* Latest Video */}
-      <div>
-        <div className="aspect-video rounded-xl overflow-hidden">
-          <iframe
-            width="100%"
-            height="100%"
-            src={`https://www.youtube.com/embed/${latestVideo.id}`}
-            title={latestVideo.title}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+    <FadeIn>
+      <div className="space-y-6">
+        {/* Latest Video */}
+        <div>
+          <h2 className="text-2xl font-semibold pb-2">Latest Video</h2>
+          <div className="aspect-video rounded-xl overflow-hidden">
+            <iframe
+              width="100%"
+              height="100%"
+              src={`https://www.youtube.com/embed/${latestVideo.id}`}
+              title={latestVideo.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Previous Videos Carousel */}
-      <VideoCarousel videos={previousVideos} visibleCount={4} />
-    </div>
+        {/* Previous Videos Carousel */}
+        <VideoCarousel videos={previousVideos} visibleCount={4} />
+      </div>
+    </FadeIn>
   );
 };
 

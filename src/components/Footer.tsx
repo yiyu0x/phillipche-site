@@ -51,7 +51,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="py-8 mt-16">
+    <footer className="pb-8">
       <div className="container-width">
         <div className="flex flex-col items-center justify-center space-y-4">
           <div className="flex flex-wrap items-center justify-center gap-6 px-4">
