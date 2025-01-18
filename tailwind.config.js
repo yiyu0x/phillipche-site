@@ -6,7 +6,26 @@ export default {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'wave': 'wave 1s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate',
+      },
+      keyframes: {
+        wave: {
+          '0%': { transform: 'scaleY(1)' },
+          '10%': { transform: 'scaleY(1.05)' },
+          '20%': { transform: 'scaleY(1.1)' },
+          '30%': { transform: 'scaleY(1.2)' },
+          '40%': { transform: 'scaleY(1.3)' },
+          '50%': { transform: 'scaleY(1.4)' },
+          '60%': { transform: 'scaleY(1.3)' },
+          '70%': { transform: 'scaleY(1.2)' },
+          '80%': { transform: 'scaleY(1.1)' },
+          '90%': { transform: 'scaleY(1.05)' },
+          '100%': { transform: 'scaleY(1)' },
+        },
+      },
+    },
   },
   plugins: [],
 } 

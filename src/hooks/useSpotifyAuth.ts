@@ -1,52 +1,37 @@
 import { useState, useEffect } from 'react';
 
 const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-const REDIRECT_URI = 'http://localhost:5173/callback'; // Update this for production
-const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
-const SCOPES = [
-  'user-read-currently-playing',
-  'user-read-recently-played',
-  'user-read-playback-state',
-  'user-top-read',
-  'user-modify-playback-state',
-];
+const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
+const REFRESH_TOKEN = import.meta.env.VITE_SPOTIFY_REFRESH_TOKEN;
+const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 
 export const useSpotifyAuth = () => {
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    // Check for token in URL on callback
-    const hash = window.location.hash;
-    if (hash) {
-      const token = hash
-        .substring(1)
-        .split('&')
-        .find(elem => elem.startsWith('access_token'))
-        ?.split('=')[1];
-
-      if (token) {
-        setToken(token);
-        localStorage.setItem('spotify_token', token);
-        // Clean URL
-        window.location.hash = '';
-      }
-    }
-
-    // Check for saved token
-    const savedToken = localStorage.getItem('spotify_token');
-    if (savedToken) {
-      setToken(savedToken);
+    if (!token) {
+      getAccessToken().then((data) => {
+        setToken(data.access_token);
+      })
     }
   }, []);
 
-  const login = () => {
-    window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES.join('%20')}&response_type=token&show_dialog=true`;
-  };
+  const getAccessToken = async () => {
+    const basic = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
+    const params = new URLSearchParams();
+    params.append("grant_type", "refresh_token");
+    params.append("refresh_token", REFRESH_TOKEN);
 
-  const logout = () => {
-    setToken(null);
-    localStorage.removeItem('spotify_token');
-  };
-
-  return { token, login, logout };
-}; 
+    const response = await fetch(TOKEN_ENDPOINT, {
+        method: 'POST',
+        headers: {
+        Authorization: `Basic ${basic}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: params.toString()
+    })
+    return response.json();
+}
+  
+  return { token };
+};

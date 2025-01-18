@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
@@ -12,6 +12,9 @@ interface YouTubeVideo {
 const YouTubeLatest = () => {
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemWidth, setItemWidth] = useState(0); // State to hold the width of each video item
+  const videoRef = useRef<HTMLAnchorElement>(null); // Ref for the video item
+
   const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
   const CHANNEL_ID = import.meta.env.VITE_YOUTUBE_CHANNEL_ID;
   const VIDEOS_VISIBLE = 4;
@@ -19,8 +22,12 @@ const YouTubeLatest = () => {
   // Update currentIndex when videos are loaded
   useEffect(() => {
     if (videos.length > 0) {
-      const startIndex = (videos.length - 1) * 2; // -1 because first video is latest
-      setCurrentIndex(startIndex);
+      setCurrentIndex(0); // Start from the first video
+    }
+
+    if (videoRef.current) {
+      const width = videoRef.current.getBoundingClientRect().width;
+      setItemWidth(width + 10); // Set the width in state
     }
   }, [videos]);
 
@@ -80,46 +87,21 @@ const YouTubeLatest = () => {
 
   const [latestVideo, ...previousVideos] = videos;
 
-  // Create a much longer array for truly infinite scrolling
-  const duplicatedVideos = [
-    ...previousVideos,
-    ...previousVideos,
-    ...previousVideos,
-    ...previousVideos,
-    ...previousVideos,
-    ...previousVideos
-  ];
-
-  // Create a circular array with padding for smooth transitions
-  const getCircularVideos = () => {
-    const totalVideos = duplicatedVideos.length;
-    const videos = [];
-    
-    // Add videos before current index for smooth backward transition
-    for (let i = -VIDEOS_VISIBLE; i < VIDEOS_VISIBLE * 2; i++) {
-      let index = currentIndex + i;
-      // Handle wrapping
-      while (index < 0) index += totalVideos;
-      index = index % totalVideos;
-      videos.push(duplicatedVideos[index]);
-    }
-    
-    return videos;
-  };
-
   const nextVideo = () => {
-    setCurrentIndex(prev => prev + 1);
+    if (currentIndex < previousVideos.length - VIDEOS_VISIBLE) {
+      setCurrentIndex(Math.min(currentIndex + 1, previousVideos.length - 1)); // Move to the next video
+    }
   };
 
   const prevVideo = () => {
-    setCurrentIndex(prev => prev - 1);
+    if (currentIndex > 0) {
+      setCurrentIndex(Math.max(currentIndex - 1, 0)); // Move to the previous video
+    }
   };
 
   // Calculate the transform offset
   const getTransformX = () => {
-    const itemWidth = 25 + 0.75; // width + gap
-    const offset = VIDEOS_VISIBLE * itemWidth; // Center the visible videos
-    return -(currentIndex * itemWidth) + offset;
+    return -currentIndex * itemWidth; // Move by the width of one item
   };
 
   return (
@@ -141,25 +123,30 @@ const YouTubeLatest = () => {
 
       {/* Previous Videos Carousel */}
       <div className="relative">
-        <div className="overflow-hidden px-4 relative">
-          {/* Left fade gradient */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-gray-50 dark:from-gray-900 to-transparent z-10"></div>
-          {/* Right fade gradient */}
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-gray-50 dark:from-gray-900 to-transparent z-10"></div>
+        <div className="overflow-hidden px-0 relative">
+          {/* Left fade gradient - only show if not at the first video */}
+          <div
+            className={`absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-gray-50 dark:from-gray-900 to-transparent z-10 transition-opacity duration-300 ${currentIndex > 0 ? 'opacity-100' : 'opacity-0'}`}
+          ></div>
+          {/* Right fade gradient - only show if not at the last video */}
+          <div
+            className={`absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-gray-50 dark:from-gray-900 to-transparent z-10 transition-opacity duration-300 ${currentIndex < previousVideos.length - VIDEOS_VISIBLE ? 'opacity-100' : 'opacity-0'}`}
+          ></div>
           
           <motion.div 
             className="flex gap-3"
             animate={{ 
-              x: -currentIndex * (25 + 0.75) + '%'
+              x: getTransformX()
             }}
             transition={{ 
-              duration: 0.5, 
+              duration: 0.2, 
               ease: "easeInOut"
             }}
           >
-            {duplicatedVideos.map((video, index) => (
+            {previousVideos.map((video, index) => (
               <a
-                key={`${video.id}-${index}`}
+                ref={index === 0 ? videoRef : null} // Attach the ref to the first video item
+                key={video.id}
                 href={`https://www.youtube.com/watch?v=${video.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -183,34 +170,38 @@ const YouTubeLatest = () => {
         {/* Navigation Arrows */}
         {previousVideos.length > VIDEOS_VISIBLE && (
           <>
-            <button
-              onClick={prevVideo}
-              className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors z-20"
-              aria-label="Previous video"
-            >
-              <svg 
-                className="w-5 h-5" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
+            {currentIndex > 0 && ( // Show left arrow only if not at the first video
+              <button
+                onClick={prevVideo}
+                className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors z-20"
+                aria-label="Previous video"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={nextVideo}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors z-20"
-              aria-label="Next video"
-            >
-              <svg 
-                className="w-5 h-5" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
+                <svg 
+                  className="w-5 h-5" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
+            {currentIndex < previousVideos.length - VIDEOS_VISIBLE && ( // Show right arrow only if not at the last video
+              <button
+                onClick={nextVideo}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors z-20"
+                aria-label="Next video"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+                <svg 
+                  className="w-5 h-5" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            )}
           </>
         )}
       </div>

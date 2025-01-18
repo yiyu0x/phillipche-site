@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Gear from './pages/Gear';
 import Gallery from './pages/Gallery';
-import SpotifyCallback from './pages/SpotifyCallback';
 import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/gear" element={<Gear />} />
                 <Route path="/gallery" element={<Gallery />} />
-                <Route path="/callback" element={<SpotifyCallback />} />
               </Routes>
             </div>
           </main>
