@@ -8,7 +8,7 @@ const SpotifyPlaying = () => {
   return (
     <div className="space-y-4">
       <FadeIn>
-        <h2 className="text-xl font-semibold text-[#111828] dark:text-white mb-4">
+        <h2 className="text-lg font-semibold text-[#111828] dark:text-white mb-4">
           {currentTrack ? 'Now Playing' : 'Recently Played'}
         </h2>
       </FadeIn>

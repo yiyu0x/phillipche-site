@@ -6,17 +6,17 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="space-y-6">
+      <section className="space-y-4">
         <motion.h1 
-          className="text-3xl sm:text-4xl md:text-5xl font-bold"
+          className="text-2xl sm:text-3xl font-bold"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Hey, I'm Phillip 👋
+          hello, Phillip here!
         </motion.h1>
         <motion.p 
-          className="text-base sm:text-lg md:text-xl leading-relaxed"
+          className="text-sm sm:text-base leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -30,7 +30,7 @@ const Home = () => {
         className="space-y-1"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5 }}
       >
         <div className="card p-0 py-4">
           <YouTubeLatest />
@@ -42,7 +42,7 @@ const Home = () => {
         className="mt-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        transition={{ duration: 0.5, delay: 2 }}
       >
         <div className="card">
           <SpotifyPlaying />

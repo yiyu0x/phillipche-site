@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
-import YouTubeLatest from '../components/YouTubeLatest';
 
 const About = () => {
   const sections = [
     {
       title: "Professional Life",
       content: (
-        <p className="leading-relaxed">
+        <p className="text-sm leading-relaxed">
           I recently graduated from{' '}
           <span className="font-medium">Cal Poly Pomona</span>{' '}
           with a B.S in Computer Science and am now working as a full-time{' '}
@@ -48,32 +47,23 @@ const About = () => {
   ];
 
   return (
-    <div className="space-y-16">
-      <div className="space-y-12">
+    <div className="space-y-12">
+      <div className="space-y-8">
         {sections.map((section, index) => (
           <motion.section
             key={section.title}
-            className="space-y-4"
+            className="space-y-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <h2 className="text-2xl font-semibold">{section.title}</h2>
-            <div className="card p-6">
+            <h2 className="text-lg font-semibold">{section.title}</h2>
+            <div className="card p-4 sm:p-5">
               {section.content}
             </div>
           </motion.section>
         ))}
       </div>
-
-      <motion.section
-        className="space-y-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
-        <YouTubeLatest />
-      </motion.section>
     </div>
   );
 };

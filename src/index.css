@@ -4,21 +4,33 @@
 
 @layer base {
   body {
-    @apply antialiased text-gray-600 dark:text-gray-300 bg-white dark:bg-black;
+    @apply antialiased text-sm text-gray-600 dark:text-gray-300 bg-white dark:bg-black;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply text-gray-900 dark:text-white font-medium tracking-tight;
   }
+
+  h1 {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  h2 {
+    @apply text-lg sm:text-xl;
+  }
+
+  p {
+    @apply text-sm leading-relaxed;
+  }
 }
 
 @layer components {
   .container-width {
-    @apply max-w-3xl mx-auto px-4 sm:px-6;
+    @apply max-w-2xl mx-auto px-4 sm:px-6;
   }
 
   .section {
-    @apply py-8 sm:py-12;
+    @apply py-6 sm:py-8;
   }
 
   .card {

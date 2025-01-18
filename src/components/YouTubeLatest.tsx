@@ -77,7 +77,6 @@ const   YouTubeLatest = () => {
     return (
       <div className="space-y-6">
         <div>
-          <h2 className="text-2xl font-semibold pb-2">Latest Video</h2>
           <div className="aspect-video rounded-xl overflow-hidden">
             <div className="w-full h-full bg-gray-200 dark:bg-gray-800 animate-pulse" />
           </div>
@@ -103,7 +102,7 @@ const   YouTubeLatest = () => {
       <div className="space-y-6">
         {/* Latest Video */}
         <div>
-          <h2 className="text-2xl font-semibold pb-2">Latest Video</h2>
+          <h2 className="text-lg font-semibold pb-2">Latest Video</h2>
           <div className="aspect-video rounded-xl overflow-hidden">
             <iframe
               width="100%"
