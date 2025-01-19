@@ -31,7 +31,7 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.2 }}
         >
-          your average boba enjoyer from socal trying to navigate through the struggles of becoming a software engineer.
+          your average boba enjoyer from socal trying to document the struggles of becoming a software engineer.
         </motion.p>
       </section>
 
