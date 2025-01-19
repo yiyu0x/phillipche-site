@@ -13,7 +13,7 @@ interface GearItem {
 const Gear = () => {
   const gearList: GearItem[] = [
     {
-      category: "Computer / Workspace",
+      category: "Desk",
       items: [
         {
           name: "MacBook Pro 16\" Space Black",
@@ -116,7 +116,7 @@ const Gear = () => {
             transition={{ duration: 0.5, delay: sectionIndex * 0.1 }}
           >
             <h2 className="text-lg font-medium mb-6">{section.category}</h2>
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {section.items.map((item, itemIndex) => (
                 <motion.div
                   key={item.name}
@@ -130,7 +130,7 @@ const Gear = () => {
                 >
                   <div className="flex items-center p-3 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-colors rounded-xl">
                     {/* Image */}
-                    <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0">
                       <img
                         src={item.image}
                         alt={item.name}
@@ -139,10 +139,10 @@ const Gear = () => {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-grow px-4">
-                      <h3 className="font-medium mb-1">{item.name}</h3>
+                    <div className="flex-grow px-3 sm:px-4">
+                      <h3 className="font-medium mb-1 text-sm sm:text-base">{item.name}</h3>
                       {item.description && (
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                           {item.description}
                         </p>
                       )}
@@ -157,7 +157,7 @@ const Gear = () => {
                     >
                       <motion.svg 
                         xmlns="http://www.w3.org/2000/svg" 
-                        className="h-5 w-5"
+                        className="h-4 w-4 sm:h-5 sm:w-5"
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke="currentColor"
