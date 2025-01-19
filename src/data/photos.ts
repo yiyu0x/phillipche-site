@@ -14,14 +14,14 @@ export const photos = [
     style: "sm:top-12 sm:left-[15%] top-8 right-2 rotate-[4deg] z-20"
   },
   {
-    image: "https://github.com/phillip-che/phillipche-site/blob/main/src/assets/images/10.jpg",
+    image: "https://raw.githubusercontent.com/phillip-che/phillipche-site/refs/heads/main/src/assets/images/10.jpg",
     date: "July 2024",
     location: "COEX Aquarium, South Korea",
     caption: "pregnant korean shark",
     style: "sm:left-[45%] top-8 right-8 rotate-[-3deg] z-30"
   },
   {
-    image: "https://github.com/phillip-che/phillipche-site/blob/main/src/assets/images/3.jpg",
+    image: "https://raw.githubusercontent.com/phillip-che/phillipche-site/refs/heads/main/src/assets/images/3.jpg",
     date: "December 2023",
     location: "Joshua Park, CA",
     caption: "lots of rocks",
