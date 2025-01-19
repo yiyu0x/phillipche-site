@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { PhotoGallery } from '../components/PhotoGallery';
 import { AboutSection } from '../components/AboutSection';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 const About = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -15,6 +16,8 @@ const About = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  usePageTitle('About');
 
   return (
     <div>
