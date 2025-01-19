@@ -125,15 +125,20 @@ const Gear = () => {
             <h2 className="text-lg font-medium mb-6">{section.category}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {section.items.map((item, itemIndex) => (
-                <motion.div
+                <motion.a
                   key={item.name}
-                  className="card group"
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card group cursor-pointer"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.5,
                     delay: sectionIndex * 0.1 + itemIndex * 0.05
                   }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <div className="flex items-center p-3 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-colors rounded-xl">
                     {/* Image */}
@@ -142,6 +147,7 @@ const Gear = () => {
                         src={item.image}
                         alt={item.name}
                         className="w-full h-full object-cover"
+                        draggable={false}
                       />
                     </div>
 
@@ -156,20 +162,13 @@ const Gear = () => {
                     </div>
 
                     {/* Link Icon */}
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-                    >
-                      <motion.svg 
+                    <div className="text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                      <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         className="h-4 w-4 sm:h-5 sm:w-5"
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke="currentColor"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
                       >
                         <path 
                           strokeLinecap="round" 
@@ -177,10 +176,10 @@ const Gear = () => {
                           strokeWidth={2} 
                           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" 
                         />
-                      </motion.svg>
-                    </a>
+                      </svg>
+                    </div>
                   </div>
-                </motion.div>
+                </motion.a>
               ))}
             </div>
           </motion.div>
