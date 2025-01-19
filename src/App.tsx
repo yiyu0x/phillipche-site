@@ -6,11 +6,13 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Gear from './pages/Gear';
 // import Gallery from './pages/Gallery';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTop />
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
           <Navbar />
           <main className="flex-1 pt-20 pb-12">

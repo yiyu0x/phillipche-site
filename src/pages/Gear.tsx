@@ -97,16 +97,23 @@ const Gear = () => {
   ];
 
   return (
-    <div className="space-y-12">
+    <div>
       <motion.h1 
-        className="text-2xl font-bold"
+        className="text-3xl font-bold"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         Gear
       </motion.h1>
-
+      <motion.p
+        className="text-sm sm:text-base leading-relaxed mb-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        What I use.
+      </motion.p>
       <div className="space-y-12">
         {gearList.map((section, sectionIndex) => (
           <motion.div

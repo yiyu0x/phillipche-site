@@ -21,6 +21,7 @@ declare global {
 export function useSpotify() {
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [recentTracks, setRecentTracks] = useState<Track[]>([]);
+  const [topTracks, setTopTracks] = useState<Track[]>([]);
   const { token } = useSpotifyAuth();
 
   useEffect(() => {
@@ -102,8 +103,46 @@ export function useSpotify() {
     return () => clearInterval(interval);
   }, [token]);
 
+  useEffect(() => {
+    if (!token) return;
+
+    const fetchTopTracks = async () => {
+      try {
+        const response = await axios.get(
+          'https://api.spotify.com/v1/me/top/tracks?limit=5&time_range=short_term',
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          }
+        );
+
+        if (response.data && response.data.items) {
+          const tracks = response.data.items.map((item: any) => ({
+            id: item.id,
+            name: item.name,
+            artist: item.artists.map((artist: { name: string }) => artist.name).join(', '),
+            album: item.album.name,
+            albumImageUrl: item.album.images[0].url,
+            spotifyUrl: item.external_urls.spotify,
+          }));
+          setTopTracks(tracks);
+        }
+      } catch (error) {
+        console.error('Error fetching top tracks:', error);
+      }
+    };
+
+    fetchTopTracks();
+    // Fetch top tracks every hour
+    const interval = setInterval(fetchTopTracks, 3600000);
+
+    return () => clearInterval(interval);
+  }, [token]);
+
   return {
     currentTrack,
     recentTracks,
+    topTracks,
   };
 } 

@@ -47,7 +47,23 @@ const About = () => {
   ];
 
   return (
-    <div className="space-y-12">
+    <div>
+      <motion.h1 
+        className="text-3xl font-bold"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        About
+      </motion.h1>
+      <motion.p
+        className="text-sm sm:text-base leading-relaxed mb-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        Who I am.
+      </motion.p>
       <div className="space-y-8">
         {sections.map((section, index) => (
           <motion.section
