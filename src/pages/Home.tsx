@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import SpotifyPlaying from '../components/SpotifyNowPlaying';
+import { TypeAnimation } from 'react-type-animation';
+import SpotifyPlaying from '../components/SpotifyPlaying';
 import YouTubeLatest from '../components/YouTubeLatest';
 
 const Home = () => {
@@ -7,21 +8,30 @@ const Home = () => {
     <div>
       {/* Hero Section */}
       <section className="space-y-4">
-        <motion.h1
+        <motion.div
           className="text-2xl sm:text-3xl font-bold"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          hello, Phillip here!
-        </motion.h1>
+          <TypeAnimation
+            sequence={[
+              'hello, Phillip here',
+            ]}
+            wrapper="h1"
+            cursor={true}
+            repeat={0}
+            speed={50}
+            style={{ display: 'inline-block' }}
+          />
+        </motion.div>
         <motion.p
           className="text-sm sm:text-base leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 1.2 }}
         >
-          Software Engineer at Amazon, based in Seattle. I create content about tech, productivity, and my journey as a software engineer.
+          your average boba enjoyer from socal trying to navigate through the struggles of becoming a software engineer.
         </motion.p>
       </section>
 
@@ -30,7 +40,7 @@ const Home = () => {
         className="space-y-1"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, delay: 1.5 }}
       >
         <div className="py-4">
           <YouTubeLatest />

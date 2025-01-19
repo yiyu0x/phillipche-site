@@ -22,7 +22,7 @@ const SpotifyPlaying = () => {
               />
           ) : (
             recentTracks?.[0] && (
-                <Spotify 
+                <Spotify
                   link={recentTracks[0].spotifyUrl} 
                 />
             )
@@ -31,14 +31,15 @@ const SpotifyPlaying = () => {
         </div>
 
         {/* Recent Tracks */}
-        <div className="md:w-1/2 flex flex-col space-y-4">
+        <div className="md:w-1/2 flex flex-col space-y-2.5">
           {recentTracks
             ?.slice(currentTrack ? 0 : 1, currentTrack ? 4 : 5)
             .map((track, index) => (
-              <FadeIn key={track.id} delay={1 + index * 0.2}>
+              <FadeIn key={index} delay={1 + index * 0.2}>
                 <Spotify 
                   wide
                   link={track.spotifyUrl}
+                  key={index}
                 />
               </FadeIn>
             ))}
