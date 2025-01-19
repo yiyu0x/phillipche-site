@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { sections } from '../data/sections';
-import { sectionVariants, titleVariants, containerVariants } from '../utils/animations';
+import { sectionVariants, titleVariants } from '../utils/animations';
 import { useState } from 'react';
 
 export const AboutSection = () => {
