@@ -61,11 +61,11 @@ export function useSpotify() {
     fetchCurrentTrack();
 
     // Poll for updates
-    const interval = setInterval(fetchCurrentTrack, 1000);
+    // const interval = setInterval(fetchCurrentTrack, 1000);
 
-    return () => {
-      clearInterval(interval);
-    };
+    // return () => {
+    //   clearInterval(interval);
+    // };
   }, [token]);
 
   // Add logic to fetch recent tracks
@@ -98,9 +98,9 @@ export function useSpotify() {
 
     fetchRecentTracks();
     // Fetch recent tracks every minute
-    const interval = setInterval(fetchRecentTracks, 60000);
+    // const interval = setInterval(fetchRecentTracks, 60000);
 
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, [token]);
 
   useEffect(() => {
@@ -135,9 +135,9 @@ export function useSpotify() {
 
     fetchTopTracks();
     // Fetch top tracks every hour
-    const interval = setInterval(fetchTopTracks, 3600000);
+    // const interval = setInterval(fetchTopTracks, 3600000);
 
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
   }, [token]);
 
   return {

@@ -1,14 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSpotify } from '../hooks/useSpotify';
 import { Spotify } from 'react-spotify-embed';
 import FadeIn from './FadeIn';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 type TrackListType = 'recent' | 'top';
 
 const SpotifyPlaying = () => {
   const { currentTrack, recentTracks, topTracks } = useSpotify();
   const [activeList, setActiveList] = useState<TrackListType>('recent');
+  const [displayTrack, setDisplayTrack] = useState<any>(null);
+  const [tracksList, setTracksList] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Always show current track if it exists
+    if (currentTrack) {
+      setDisplayTrack(currentTrack);
+      if (activeList === 'top') {
+        // Show top 4 tracks when viewing top tracks
+        setTracksList(topTracks.slice(0, 4));
+      } else {
+        // Show recent tracks (excluding current track if it's in the list)
+        setTracksList(recentTracks.slice(0, 4));
+      }
+    } else {
+      // No current track playing
+      if (activeList === 'top') {
+        // Show #1 top track as main and rest in list
+        setDisplayTrack(topTracks[0]);
+        setTracksList(topTracks.slice(1));
+      } else {
+        // Show most recent track as main and rest in list
+        setDisplayTrack(recentTracks[0]);
+        setTracksList(recentTracks.slice(1, 5));
+      }
+    }
+  }, [activeList, currentTrack, recentTracks, topTracks]);
 
   return (
     <div>
@@ -16,7 +43,9 @@ const SpotifyPlaying = () => {
         <div className="flex flex-col space-y-4 mb-4">
           <div className="flex justify-between items-center">
             <h2 className="text-lg font-semibold text-[#111828] dark:text-white">
-              {currentTrack ? 'Now Playing' : 'Recently Played'}
+              {currentTrack 
+                ? 'Now Playing'
+                : (activeList === 'top' ? '#1 Top Track' : 'Recently Played')}
             </h2>
 
             {/* Track List Toggle */}
@@ -46,20 +75,29 @@ const SpotifyPlaying = () => {
         </div>
       </FadeIn>
 
-      {/* Current Track or Most Recent Track */}
       <div className="flex flex-col md:flex-row md:gap-4">
-        <div className="md:w-1/2 mb-4 md:mb-0">
-          <FadeIn>
-            {currentTrack ? (
-              <Spotify link={currentTrack.spotifyUrl} />
-            ) : (
-              recentTracks?.[0] && <Spotify link={recentTracks[0].spotifyUrl} />
-            )}
-          </FadeIn>
+        {/* Main Track Display */}
+        <div className="w-full md:w-1/2 mb-4 md:mb-0">
+          <AnimatePresence mode="sync">
+            <motion.div
+              key={displayTrack?.spotifyUrl}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {displayTrack && (
+                <Spotify 
+                  link={displayTrack.spotifyUrl}
+                  className="w-full"
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Recent/Top Tracks List */}
-        <div className="md:w-1/2">
+        <div className="w-full md:w-1/2">
           <motion.div
             key={activeList}
             initial={{ opacity: 0, x: 20 }}
@@ -68,14 +106,15 @@ const SpotifyPlaying = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="grid gap-3">
-              {(activeList === 'recent' ? recentTracks : topTracks)
-                ?.slice(activeList === 'recent' && currentTrack ? 0 : 1, 
-                        activeList === 'recent' && currentTrack ? 4 : 5)
-                .map((track, index) => (
-                  <FadeIn key={index} delay={1 + index * 0.2}>
-                    <Spotify wide link={track.spotifyUrl} />
-                  </FadeIn>
-                ))}
+              {tracksList.map((track, index) => (
+                <FadeIn key={index} delay={1 + index * 0.3}>
+                  <Spotify 
+                    wide 
+                    link={track.spotifyUrl}
+                    className="w-full"
+                  />
+                </FadeIn>
+              ))}
             </div>
           </motion.div>
         </div>
