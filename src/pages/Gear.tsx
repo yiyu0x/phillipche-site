@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 interface GearItem {
   category: string;
@@ -11,6 +12,7 @@ interface GearItem {
 }
 
 const Gear = () => {
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const gearList: GearItem[] = [
     {
       category: "Desk",
@@ -132,22 +134,34 @@ const Gear = () => {
                   rel="noopener noreferrer"
                   className="card group cursor-pointer"
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={{ 
+                    opacity: hoveredItem === null || hoveredItem === item.name ? 1 : 0.5,
+                    scale: hoveredItem === item.name ? 1.02 : 1,
+                  }}
                   transition={{
-                    duration: 0.5,
+                    duration: 0.3,
                     delay: sectionIndex * 0.1 + itemIndex * 0.05
                   }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  onHoverStart={() => setHoveredItem(item.name)}
+                  onHoverEnd={() => setHoveredItem(null)}
+                  style={{
+                    transformOrigin: 'center left'
+                  }}
                 >
                   <div className="flex items-center p-3 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-colors rounded-xl">
                     {/* Image */}
                     <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0">
-                      <img
+                      <motion.img
                         src={item.image}
                         alt={item.name}
                         className="w-full h-full object-cover"
                         draggable={false}
+                        animate={{
+                          scale: hoveredItem === item.name ? 1.1 : 1
+                        }}
+                        transition={{
+                          duration: 0.3
+                        }}
                       />
                     </div>
 
@@ -162,7 +176,15 @@ const Gear = () => {
                     </div>
 
                     {/* Link Icon */}
-                    <div className="text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">
+                    <motion.div 
+                      className="text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors"
+                      animate={{
+                        x: hoveredItem === item.name ? 2 : 0
+                      }}
+                      transition={{
+                        duration: 0.2
+                      }}
+                    >
                       <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         className="h-4 w-4 sm:h-5 sm:w-5"
@@ -177,7 +199,7 @@ const Gear = () => {
                           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" 
                         />
                       </svg>
-                    </div>
+                    </motion.div>
                   </div>
                 </motion.a>
               ))}

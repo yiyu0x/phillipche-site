@@ -25,11 +25,11 @@ export const cardVariants = {
 
 export const sectionVariants = {
   hover: {
-    backgroundColor: "rgba(var(--card-rgb), 0.05)",
+    scale: 1.02,
     transition: {
-      type: "tween",
-      ease: "easeOut",
-      duration: 0.2
+      type: "spring",
+      bounce: 0.3,
+      duration: 0.4
     }
   }
 };
@@ -40,6 +40,15 @@ export const titleVariants = {
     transition: {
       type: "tween",
       ease: "easeOut",
+      duration: 0.2
+    }
+  }
+};
+
+export const containerVariants = {
+  hover: {
+    opacity: 0.5,
+    transition: {
       duration: 0.2
     }
   }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSpotify } from '../hooks/useSpotify';
 import { Spotify } from 'react-spotify-embed';
-import FadeIn from './FadeIn';
+import FadeIn from '../utils/FadeIn';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type TrackListType = 'recent' | 'top';

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import VideoCarousel from './VideoCarousel';
-import FadeIn from './FadeIn';
+import FadeIn from '../utils/FadeIn';
 
 interface YouTubeVideo {
   id: string;

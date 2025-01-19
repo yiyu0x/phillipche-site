@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Gear from './pages/Gear';
 // import Gallery from './pages/Gallery';
-import ScrollToTop from './components/ScrollToTop';
+import ScrollToTop from './utils/ScrollToTop';
 
 const pageVariants = {
   initial: {
