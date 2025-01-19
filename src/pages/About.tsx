@@ -4,31 +4,34 @@ import { useState, useEffect } from 'react';
 
 const photos = [
   {
-    image: "/src/assets/images/1.png",
-    date: "December 2023",
-    location: "Seattle, WA",
-    caption: "First snow of the season at Kerry Park",
-    style: "sm:top-4 sm:left-[-15%] top-2 left-2 rotate-[-6deg] z-10"
+    image: "/src/assets/images/1.jpg",
+    date: "June 2024",
+    location: "Lake Tahoe, CA",
+    caption: "i got frostbite from the water",
+
+    style: "sm:top-4 sm:left-[-10%] top-2 left-2 rotate-[-6deg] z-10"
   },
   {
-    image: "/src/assets/images/2.png",
-    date: "November 2023",
-    location: "Los Angeles, CA",
-    caption: "Sunset at Santa Monica Pier",
+    image: "/src/assets/images/5.jpg",
+    date: "December 2024",
+    location: "San Diego, CA",
+    caption: "balboa park was too big",
+
     style: "sm:top-12 sm:left-[15%] top-8 right-2 rotate-[4deg] z-20"
   },
   {
-    image: "/src/assets/images/3.png",
-    date: "October 2023",
-    location: "New York, NY",
-    caption: "Fall colors in Central Park",
+    image: "/src/assets/images/10.jpg",
+    date: "July 2024",
+    location: "COEX Aquarium, South Korea",
+    caption: "pregnant korean shark",
+
     style: "sm:left-[45%] top-8 right-8 rotate-[-3deg] z-30"
   },
   {
-    image: "/src/assets/images/4.png",
-    date: "September 2023",
-    location: "Portland, OR",
-    caption: "Morning coffee at Stumptown",
+    image: "/src/assets/images/3.jpg",
+    date: "December 2023",
+    location: "Joshua Park, CA",
+    caption: "lots of rocks",
     style: "top-[10%] left-[70%] rotate-[5deg] z-40"
   }
 ];
@@ -59,7 +62,7 @@ const sections = [
   {
     title: "Side Projects",
     content: (
-      <div className="space-y-4">
+      <div className="space-y-2">
         <p className="leading-relaxed">
           I previously ran{' '}
           <span className="font-medium">Solace Notify</span>, an online sneaker 
@@ -79,7 +82,6 @@ const sections = [
 ];
 
 const About = () => {
-  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const baseZIndex = 10;
 
@@ -180,8 +182,6 @@ const About = () => {
             dragElastic={0.1}
             whileHover={!isMobile ? { scale: 1.02 } : undefined}
             whileDrag={{ scale: 1.1, zIndex: 50 }}
-            onDragStart={() => !isMobile && setDraggedIndex(index)}
-            onDragEnd={() => !isMobile && setDraggedIndex(null)}
           >
             <PhotoCard {...photo} isMobile={isMobile} />
           </motion.div>
@@ -189,17 +189,17 @@ const About = () => {
       </motion.div>
 
       {/* About Sections */}
-      <div className="space-y-8">
+      <div className="space-y-2">
         {sections.map((section, index) => (
           <motion.section
             key={section.title}
-            className="space-y-3"
+            className="space-y-1"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <h2 className="text-lg font-semibold">{section.title}</h2>
-            <div className="card p-4 sm:p-5">
+            <div className="card p-4 sm:p-3">
               {section.content}
             </div>
           </motion.section>

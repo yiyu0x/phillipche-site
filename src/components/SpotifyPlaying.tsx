@@ -45,7 +45,7 @@ const SpotifyPlaying = () => {
             <h2 className="text-lg font-semibold text-[#111828] dark:text-white">
               {currentTrack 
                 ? 'Now Playing'
-                : (activeList === 'top' ? '#1 Top Track' : 'Recently Played')}
+                : (activeList === 'top' ? '#1 Top Track This Month' : 'Recently Played')}
             </h2>
 
             {/* Track List Toggle */}
