@@ -42,7 +42,7 @@ const VideoCarousel = ({ videos, visibleCount = 4 }: VideoCarouselProps) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative hidden sm:block">
       <div className="overflow-hidden px-0 relative">
         {/* Left fade gradient */}
         <div
