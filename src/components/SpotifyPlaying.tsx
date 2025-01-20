@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSpotify } from '../hooks/useSpotify';
 import { Spotify } from 'react-spotify-embed';
 import FadeIn from '../utils/FadeIn';
@@ -13,6 +13,7 @@ const SpotifyPlaying = () => {
   const [displayTrack, setDisplayTrack] = useState<any>(null);
   const [tracksList, setTracksList] = useState<any[]>([]);
   const { currentTheme } = useTheme();
+  const tracksRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Always show current track if it exists
@@ -39,6 +40,17 @@ const SpotifyPlaying = () => {
     }
   }, [activeList, currentTrack, recentTracks, topTracks]);
 
+  const handleTabClick = (type: TrackListType) => {
+    setActiveList(type);
+    // Smooth scroll to tracks section
+    setTimeout(() => {
+      tracksRef.current?.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 100); // Small delay to ensure content has updated
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -51,7 +63,7 @@ const SpotifyPlaying = () => {
         {/* Track List Toggle */}
         <div className="flex space-x-2">
           <button
-            onClick={() => setActiveList('recent')}
+            onClick={() => handleTabClick('recent')}
             className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
               activeList === 'recent'
                 ? 'text-gray-900 dark:text-white font-medium'
@@ -65,7 +77,7 @@ const SpotifyPlaying = () => {
             Recently Played
           </button>
           <button
-            onClick={() => setActiveList('top')}
+            onClick={() => handleTabClick('top')}
             className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
               activeList === 'top'
                 ? 'text-gray-900 dark:text-white font-medium'
@@ -103,26 +115,28 @@ const SpotifyPlaying = () => {
         </div>
 
         {/* Recent/Top Tracks List */}
-        <div className="w-full md:w-1/2">
-          <motion.div
-            key={activeList}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="grid gap-3">
-              {tracksList.map((track, index) => (
-                <FadeIn key={index} delay={1 + index * 0.3}>
-                  <Spotify 
-                    wide 
-                    link={track.spotifyUrl}
-                    className="w-full"
-                  />
-                </FadeIn>
-              ))}
-            </div>
-          </motion.div>
+        <div ref={tracksRef} className="w-full md:w-1/2">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeList}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="grid gap-3">
+                {tracksList.map((track, index) => (
+                  <FadeIn key={index} delay={1 + index * 0.3}>
+                    <Spotify 
+                      wide 
+                      link={track.spotifyUrl}
+                      className="w-full"
+                    />
+                  </FadeIn>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </div>
