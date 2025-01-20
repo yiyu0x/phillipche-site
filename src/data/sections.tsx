@@ -129,7 +129,7 @@ export const sections = [
     {
       title: "Learning",
       content: (
-        <div className="space-y-4">
+        <div className="space-y-4 mb-8">
           {[
             { 
               skill: "AWS", 
