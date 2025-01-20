@@ -7,11 +7,11 @@ export const AboutSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-6">
       {sections.map((section, index) => (
         <motion.section
           key={section.title}
-          className="space-y-1 rounded-xl overflow-hidden"
+          className="space-y-1 rounded-xl overflow-hidden cursor-default"
           initial={{ opacity: 0, y: 20 }}
           animate={{ 
             opacity: hoveredIndex === null || hoveredIndex === index ? 1 : 0.5,
@@ -23,7 +23,7 @@ export const AboutSection = () => {
           }}
         >
           <motion.div
-            className="card p-4 sm:p-4 transition-all cursor-default border border-transparent hover:border-gray-200 dark:hover:border-gray-800"
+            className="grid grid-cols-1 sm:grid-cols-[130px_1fr] gap-1 sm:gap-4 cursor-default"
             variants={sectionVariants}
             onHoverStart={() => setHoveredIndex(index)}
             onHoverEnd={() => setHoveredIndex(null)}
@@ -32,13 +32,13 @@ export const AboutSection = () => {
             }}
           >
             <motion.h2 
-              className="text-lg font-semibold mb-1 inline-block"
+              className="text-lg font-semibold pt-4 cursor-default"
               variants={titleVariants}
             >
               {section.title}
             </motion.h2>
             <motion.div 
-              className="transition-all"
+              className="transition-all p-4 sm:p-4 cursor-default"
               initial={false}
               animate={{ y: 0 }}
             >
