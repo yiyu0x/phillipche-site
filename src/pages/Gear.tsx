@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { useTheme } from '../context/ThemeContext';
 
 interface GearItem {
   category: string;
@@ -15,6 +16,7 @@ interface GearItem {
 const Gear = () => {
   usePageTitle('Gear');
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const { currentTheme } = useTheme();
   const gearList: GearItem[] = [
     {
       category: "Desk",
@@ -118,7 +120,7 @@ const Gear = () => {
       >
         What I use.
       </motion.p>
-      <div className="space-y-12">
+      <div className="space-y-16">
         {gearList.map((section, sectionIndex) => (
           <motion.div
             key={section.category}
@@ -126,7 +128,7 @@ const Gear = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: sectionIndex * 0.1 }}
           >
-            <h2 className="text-lg font-medium mb-6">{section.category}</h2>
+            <h2 className="text-lg font-medium">{section.category}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {section.items.map((item, itemIndex) => (
                 <motion.a
@@ -150,7 +152,13 @@ const Gear = () => {
                     transformOrigin: 'center left'
                   }}
                 >
-                  <div className="flex items-center p-3 hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-colors rounded-xl">
+                  <div 
+                    className="flex items-center p-3 rounded-xl transition-colors" 
+                    style={{ 
+                      backgroundColor: currentTheme.bg.primary,
+                      transition: 'background-color 0.2s ease-in-out'
+                    }}
+                  >
                     {/* Image */}
                     <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden flex-shrink-0">
                       <motion.img

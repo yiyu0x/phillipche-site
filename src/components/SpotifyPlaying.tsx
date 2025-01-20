@@ -3,6 +3,7 @@ import { useSpotify } from '../hooks/useSpotify';
 import { Spotify } from 'react-spotify-embed';
 import FadeIn from '../utils/FadeIn';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 type TrackListType = 'recent' | 'top';
 
@@ -11,6 +12,7 @@ const SpotifyPlaying = () => {
   const [activeList, setActiveList] = useState<TrackListType>('recent');
   const [displayTrack, setDisplayTrack] = useState<any>(null);
   const [tracksList, setTracksList] = useState<any[]>([]);
+  const { currentTheme } = useTheme();
 
   useEffect(() => {
     // Always show current track if it exists
@@ -38,43 +40,47 @@ const SpotifyPlaying = () => {
   }, [activeList, currentTrack, recentTracks, topTracks]);
 
   return (
-    <div>
-      <FadeIn>
-        <div className="flex flex-col space-y-4 mb-4">
-          <div className="flex justify-between items-center">
-            <h2 className="text-lg font-semibold text-[#111828] dark:text-white">
-              {currentTrack 
-                ? 'Now Playing'
-                : (activeList === 'top' ? '#1 Track This Month' : 'Recently Played')}
-            </h2>
+    <div className="space-y-4">
+      <div className="flex justify-between items-center">
+        <h2 className="text-lg font-semibold">
+          {currentTrack 
+            ? 'Now Playing'
+            : (activeList === 'top' ? '#1 Track This Month' : 'Recently Played')}
+        </h2>
 
-            {/* Track List Toggle */}
-            <div className="flex space-x-2">
-              <button
-                onClick={() => setActiveList('recent')}
-                className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                  activeList === 'recent'
-                  ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-medium'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                }`}
-              >
-                Recently Played
-              </button>
-              <button
-                onClick={() => setActiveList('top')}
-                className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
-                  activeList === 'top'
-                  ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-medium'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-                }`}
-              >
-                Top Tracks
-              </button>
-            </div>
-          </div>
+        {/* Track List Toggle */}
+        <div className="flex space-x-2">
+          <button
+            onClick={() => setActiveList('recent')}
+            className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+              activeList === 'recent'
+                ? 'text-gray-900 dark:text-white font-medium'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            }`}
+            style={{ 
+              backgroundColor: activeList === 'recent' ? currentTheme.nav.bubble : 'transparent',
+              transition: 'background-color 0.2s ease-in-out'
+            }}
+          >
+            Recently Played
+          </button>
+          <button
+            onClick={() => setActiveList('top')}
+            className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+              activeList === 'top'
+                ? 'text-gray-900 dark:text-white font-medium'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            }`}
+            style={{ 
+              backgroundColor: activeList === 'top' ? currentTheme.nav.bubble : 'transparent',
+              transition: 'background-color 0.2s ease-in-out'
+            }}
+          >
+            Top Tracks
+          </button>
         </div>
-      </FadeIn>
-
+      </div>
+      
       <div className="flex flex-col md:flex-row md:gap-4">
         {/* Main Track Display */}
         <div className="w-full md:w-1/2 mb-4 md:mb-0">

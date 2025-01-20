@@ -1,73 +1,73 @@
 export const theme = {
   light: {
     // Base colors
-    primary: '#4F46E5',    // Indigo-600
-    secondary: '#6B7280',  // Gray-500
-    accent: '#8B5CF6',     // Violet-500
+    primary: '#4F46E5',    // Used for primary actions and links
+    secondary: '#6B7280',  // Used for secondary text and icons
+    accent: '#8B5CF6',     // Used for hover states and highlights
     
     // Background colors
     bg: {
-      primary: '#FFFFFF',
-      secondary: '#F9FAFB',
-      tertiary: '#F3F4F6',
+      primary: '#FFFFFF',    // Main site background
+      secondary: '#F9FAFB',  // Used for Gear items and photo card backs
+      tertiary: '#F3F4F6',   // Used for hover states and borders
     },
     
     // Text colors
     text: {
-      primary: '#111827',   // Gray-900
-      secondary: '#4B5563', // Gray-600
-      tertiary: '#6B7280',  // Gray-500
-      inverse: '#FFFFFF',
+      primary: '#111827',    // Main text color for headings
+      secondary: '#4B5563',  // Used for body text and descriptions
+      tertiary: '#6B7280',   // Used for subtle text like dates
+      inverse: '#FFFFFF',    // Used for text on dark backgrounds
     },
     
     // Border colors
     border: {
-      primary: '#E5E7EB',   // Gray-200
-      secondary: '#D1D5DB', // Gray-300
+      primary: '#E5E7EB',    // Used for card borders and dividers
+      secondary: '#D1D5DB',  // Used for hover state borders
     },
 
     // Navigation
     nav: {
-      bg: 'rgba(255, 255, 255, 0.8)',
-      bubble: '#F3F4F6',
-      text: '#4B5563',
-      textHover: '#111827',
+      bg: 'rgba(255, 255, 255, 0.8)',  // Navbar background with transparency
+      bubble: '#e1e1e3',                // Used for Spotify tab buttons and nav indicators
+      text: '#4B5563',                  // Navbar text color
+      textHover: '#111827',             // Navbar text hover color
     }
   },
   
   dark: {
     // Base colors
-    primary: '#818CF8',    // Indigo-400
-    secondary: '#9CA3AF',  // Gray-400
-    accent: '#A78BFA',     // Violet-400
+    primary: '#818CF8',    // Used for primary actions and links
+    secondary: '#9CA3AF',  // Used for secondary text and icons
+    accent: '#A78BFA',     // Used for hover states and highlights
     
     // Background colors
     bg: {
-      primary: '#000000',
-      secondary: '#111827',
-      tertiary: '#1F2937',
+      primary: '#000000',    // Main site background
+      secondary: '#222222',  // Used for Gear items and photo card backs
+      tertiary: '#818CF8',   // Used for hover states and borders
     },
     
     // Text colors
     text: {
-      primary: '#F9FAFB',   // Gray-50
-      secondary: '#D1D5DB', // Gray-300
-      tertiary: '#9CA3AF',  // Gray-400
-      inverse: '#111827',
+      primary: '#F9FAFB',    // Main text color for headings
+      secondary: '#D1D5DB',  // Used for body text and descriptions
+      tertiary: '#9CA3AF',   // Used for subtle text like dates
+      inverse: '#111827',    // Used for text on light backgrounds
     },
     
     // Border colors
     border: {
-      primary: '#374151',   // Gray-700
-      secondary: '#4B5563', // Gray-600
+      primary: '#374151',    // Used for card borders and dividers
+      secondary: '#4B5563',  // Used for hover state borders
     },
 
     // Navigation
     nav: {
-      bg: 'rgba(0, 0, 0, 0.8)',
-      bubble: '#1F2937',
-      text: '#9CA3AF',
-      textHover: '#F9FAFB',
+      bg: 'rgba(0, 0, 0, 0.8)',  // Navbar background with transparency
+      bubble: '#222222',          // Used for Spotify tab buttons and nav indicators
+      text: '#9CA3AF',            // Navbar text color
+      textHover: '#F9FAFB',       // Navbar text hover color
     }
   }
 }; 

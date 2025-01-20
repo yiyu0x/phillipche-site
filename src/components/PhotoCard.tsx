@@ -1,16 +1,18 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 interface PhotoCardProps {
   image: string;
   date: string;
   location: string;
   caption: string;
-  isMobile?: boolean;
+  isMobile: boolean;
 }
 
 const PhotoCard = ({ image, date, location, caption, isMobile }: PhotoCardProps) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const { currentTheme } = useTheme();
 
   const handleMouseEnter = () => {
     if (!isMobile) {
@@ -55,6 +57,7 @@ const PhotoCard = ({ image, date, location, caption, isMobile }: PhotoCardProps)
         {/* Back of card */}
         <div 
           className="absolute w-full h-full backface-hidden bg-white dark:bg-gray-800 rounded-lg p-6 rotate-y-180 flex flex-col justify-center shadow-lg"
+          style={{ backgroundColor: currentTheme.bg.secondary }}
         >
           <div className="text-center space-y-3">
             <p className="text-sm text-gray-500 dark:text-gray-400">{date}</p>
