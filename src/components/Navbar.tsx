@@ -29,7 +29,7 @@ const Navbar = () => {
           {/* Added Logo/Icon */}
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="../src/assets/icon/transparent.png" 
+              src="https://raw.githubusercontent.com/phillip-che/phillipche-site/refs/heads/main/src/assets/icon/transparent.png" 
               alt="Phillip Che" 
               className="w-8 h-8"
             />
