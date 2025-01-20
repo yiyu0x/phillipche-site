@@ -72,7 +72,7 @@ export const sections = [
           </div>
           <div className="group">
             <div className="flex items-center space-x-2">
-              <p className="font-medium">Stocks and Crpyto</p>
+              <p className="font-medium">Stocks and Crypto</p>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               buying high and selling low is my philosophy

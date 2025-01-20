@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { usePageTitle } from '../hooks/usePageTitle';
-import { useTheme } from '../context/ThemeContext';
 
 interface GearItem {
   category: string;
@@ -16,7 +15,6 @@ interface GearItem {
 const Gear = () => {
   usePageTitle('Gear');
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const { currentTheme } = useTheme();
   const gearList: GearItem[] = [
     {
       category: "Desk",
