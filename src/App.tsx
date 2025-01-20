@@ -8,6 +8,7 @@ import About from './pages/About';
 import Gear from './pages/Gear';
 // import Gallery from './pages/Gallery';
 import ScrollToTop from './utils/ScrollToTop';
+import { Layout } from './components/Layout';
 
 const pageVariants = {
   initial: {
@@ -37,31 +38,33 @@ const App = () => {
 
   return (
     <ThemeProvider>
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          <div className="container-width section">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={location.pathname}
-                initial="initial"
-                animate="enter"
-                exit="exit"
-                variants={pageVariants}
-              >
-                <Routes location={location}>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/gear" element={<Gear />} />
-                  {/* <Route path="/gallery" element={<Gallery />} /> */}
-                </Routes>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </main>
-        <Footer />
-        <ScrollToTop />
-      </div>
+      <Layout>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            <div className="container-width section">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={location.pathname}
+                  initial="initial"
+                  animate="enter"
+                  exit="exit"
+                  variants={pageVariants}
+                >
+                  <Routes location={location}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/gear" element={<Gear />} />
+                    {/* <Route path="/gallery" element={<Gallery />} /> */}
+                  </Routes>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </main>
+          <Footer />
+          <ScrollToTop />
+        </div>
+      </Layout>
     </ThemeProvider>
   );
 };
