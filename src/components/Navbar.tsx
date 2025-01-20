@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <header 
-      className="sticky top-0 z-50 w-full backdrop-blur-sm"
+      className="w-full backdrop-blur-sm"
     >
       <nav className="container-width py-4">
         <div className="flex items-center justify-between">
