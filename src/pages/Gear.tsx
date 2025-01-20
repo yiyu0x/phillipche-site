@@ -155,8 +155,7 @@ const Gear = () => {
                   <div 
                     className="flex items-center p-3 rounded-xl transition-colors" 
                     style={{ 
-                      backgroundColor: currentTheme.bg.primary,
-                      transition: 'background-color 0.2s ease-in-out'
+                      transition: '0.2s ease-in-out'
                     }}
                   >
                     {/* Image */}

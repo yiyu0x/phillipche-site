@@ -23,7 +23,6 @@ const Navbar = () => {
   return (
     <header 
       className="sticky top-0 z-50 w-full backdrop-blur-sm"
-      style={{ backgroundColor: currentTheme.nav.bg }}
     >
       <nav className="container-width py-4">
         <div className="flex items-center justify-between">

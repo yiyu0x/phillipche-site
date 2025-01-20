@@ -25,6 +25,9 @@ export default {
           '100%': { transform: 'scaleY(1)' },
         },
       },
+      fontFamily: {
+        sans: ['Outfit', 'system-ui', '-apple-system', 'sans-serif'],
+      },
     },
   },
   plugins: [],
