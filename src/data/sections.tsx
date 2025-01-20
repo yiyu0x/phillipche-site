@@ -17,6 +17,16 @@ export const sections = [
           </div>
           <div>
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+              <p className="font-medium">California State Polytechnic University, Pomona</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2020 - 2024</p>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400 italic">B.S. Computer Science</p>
+            <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 mt-1 space-y-1">
+              <li>got my degree to make my parents proud</li>
+            </ul>
+          </div>
+          <div>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
               <p className="font-medium">Amazon</p>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2024 - 2024</p>
             </div>
@@ -24,13 +34,6 @@ export const sections = [
             <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 mt-1 space-y-1">
               <li>worked on amazon fresh grocery experience</li>
             </ul>
-          </div>
-          <div>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-              <p className="font-medium">California State Polytechnic University, Pomona</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2020 - 2024</p>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 italic">B.S. Computer Science</p>
           </div>
           <div>
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
@@ -53,44 +56,37 @@ export const sections = [
             {
               title: "YouTube",
               description: "documenting my life as a software engineer",
-              icon: "🎥",
-              stats: "100+ videos"
+              stats: "13 videos"
             },
             {
               title: "Real Estate Investing",
               description: "playing monopoly but with real money",
-              icon: "🏠",
-              stats: "2 properties"
+              stats: "0 properties"
             },
             {
               title: "Stocks and Crypto",
               description: "buying high and selling low is my philosophy",
-              icon: "💸",
-              stats: "Investing since 2018"
+              stats: "-$10,000 profit"
             },
             {
               title: "Mechanical Keyboards",
               description: "fun but will be the reason why im homeless",
-              icon: "🎹",
-              stats: "Collecting keyboards"
+              stats: "3 custom keyboards"
             },
           ].map((hobby) => (
             <motion.div
               key={hobby.title}
-              className="group p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
-              whileHover={{ scale: 1.02 }}
+              className="group p-4 rounded-xl transition-colors"
+              whileHover={{ scale: 1.05 }}
             >
-              <div className="flex items-start space-x-3">
-                <span className="text-2xl">{hobby.icon}</span>
-                <div>
-                  <h3 className="font-medium">{hobby.title}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    {hobby.description}
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
-                    {hobby.stats}
-                  </p>
-                </div>
+              <div>
+                <h3 className="font-medium">{hobby.title}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  {hobby.description}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+                  {hobby.stats}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -110,12 +106,16 @@ export const sections = [
             { name: "AWS", color: "amber" },
             // Add more skills
           ].map((skill) => (
-            <div 
-              key={skill.name}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium text-white bg-${skill.color}-500 hover:bg-${skill.color}-600 transition-colors`}
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
             >
+              <div 
+                key={skill.name}
+                className={`px-3 py-1.5 rounded-lg text-sm font-medium text-white bg-${skill.color}-500 hover:bg-${skill.color}-600 transition-colors`}
+              >
               {skill.name}
             </div>
+            </motion.div>
           ))}
         </div>
       )
@@ -125,9 +125,21 @@ export const sections = [
       content: (
         <div className="space-y-4">
           {[
-            { skill: "System Design", progress: 40 },
-            { skill: "AWS", progress: 75 },
-            { skill: "Korean", progress: 5 },
+            { 
+              skill: "AWS", 
+              progress: 40,
+              color: "amber" // Matching AWS's color from Skills section
+            },
+            { 
+              skill: "System Design", 
+              progress: 25,
+              color: "purple" // Purple for system design
+            },
+            { 
+              skill: "Korean", 
+              progress: 5,
+              color: "rose" // Rose/pink for language learning
+            }
           ].map((item) => (
             <div key={item.skill} className="space-y-1">
               <div className="flex justify-between text-sm">
@@ -136,7 +148,7 @@ export const sections = [
               </div>
               <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                 <motion.div
-                  className="h-full bg-blue-500 dark:bg-blue-400"
+                  className={`h-full bg-${item.color}-500 dark:bg-${item.color}-400`}
                   initial={{ width: 0 }}
                   animate={{ width: `${item.progress}%` }}
                   transition={{ duration: 1, delay: 0.5 }}

@@ -5,9 +5,9 @@ import { useState } from 'react';
 
 const timelineDotColors = [
   'bg-blue-500',   // Amazon SDE
-  'bg-blue-400',   // Amazon Intern
+  'bg-amber-300',   // Amazon Intern
   'bg-green-500',  // Cal Poly
-  'bg-purple-500', // Solace
+  'bg-red-500', // Solace
 ];
 
 export const AboutSection = () => {
