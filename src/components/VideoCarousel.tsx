@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 
 interface Video {
   id: string;
@@ -14,6 +15,7 @@ interface VideoCarouselProps {
 }
 
 const VideoCarousel = ({ videos, visibleCount = 4 }: VideoCarouselProps) => {
+  const { currentTheme } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemWidth, setItemWidth] = useState(0);
   const videoRef = useRef<HTMLAnchorElement>(null);
@@ -46,15 +48,21 @@ const VideoCarousel = ({ videos, visibleCount = 4 }: VideoCarouselProps) => {
       <div className="overflow-hidden px-0 relative">
         {/* Left fade gradient */}
         <div
-          className={`absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-gray-50 dark:from-gray-900 to-transparent z-10 transition-opacity duration-300 ${
+          className={`absolute left-0 top-0 bottom-0 w-16 z-10 transition-opacity duration-300 ${
             currentIndex > 0 ? 'opacity-100' : 'opacity-0'
           }`}
+          style={{
+            background: `linear-gradient(to right, ${currentTheme.bg.primary}, transparent)`
+          }}
         />
         {/* Right fade gradient */}
         <div
-          className={`absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-gray-50 dark:from-gray-900 to-transparent z-10 transition-opacity duration-300 ${
+          className={`absolute right-0 top-0 bottom-0 w-16 z-10 transition-opacity duration-300 ${
             currentIndex < videos.length - visibleCount ? 'opacity-100' : 'opacity-0'
           }`}
+          style={{
+            background: `linear-gradient(to left, ${currentTheme.bg.primary}, transparent)`
+          }}
         />
 
         <motion.div

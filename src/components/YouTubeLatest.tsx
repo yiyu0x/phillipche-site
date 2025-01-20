@@ -160,7 +160,7 @@ const YouTubeLatest = () => {
             <iframe
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/${latestVideo.id}`}
+              src={`https://www.youtube.com/embed/${latestVideo.id}?autoplay=1&mute=1`}
               title={latestVideo.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
