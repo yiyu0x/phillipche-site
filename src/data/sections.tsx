@@ -5,46 +5,50 @@ export const sections = [
       title: "Timeline",
       content: (
         <div className="space-y-4">
-          <div>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-              <p className="font-medium">Amazon</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2024 - Now</p>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 italic">Software Development Engineer</p>
-            <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 mt-1 space-y-1">
-              <li>working on large scale messaging systems</li>
-            </ul>
-          </div>
-          <div>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-              <p className="font-medium">California State Polytechnic University, Pomona</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2020 - 2024</p>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 italic">B.S. Computer Science</p>
-            <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 mt-1 space-y-1">
-              <li>got my degree to make my parents proud</li>
-            </ul>
-          </div>
-          <div>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-              <p className="font-medium">Amazon</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2024 - 2024</p>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 italic">Software Development Engineer Intern</p>
-            <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 mt-1 space-y-1">
-              <li>worked on amazon fresh grocery experience</li>
-            </ul>
-          </div>
-          <div>
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-              <p className="font-medium">Solace Notify</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">2019 - 2024</p>
-            </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 italic">Founder</p>
-            <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 mt-1 space-y-1">
-              <li>built reselling community and developed tools</li>
-            </ul>
-          </div>
+          {[
+            {
+              company: "Amazon",
+              date: "2024 - Now",
+              title: "Software Development Engineer",
+              description: ["working on large scale messaging systems"]
+            },
+            {
+              company: "California State Polytechnic University, Pomona",
+              date: "2020 - 2024",
+              title: "B.S. Computer Science",
+              description: ["got my degree to make my parents proud"]
+            },
+            {
+              company: "Amazon",
+              date: "2023 - 2023",
+              title: "Software Development Engineer Intern",
+              description: ["worked on amazon fresh grocery experience"]
+            },
+            {
+              company: "Solace Notify",
+              date: "2019 - 2023",
+              title: "Founder",
+              description: ["built reselling community and developed tools"]
+            }
+          ].map((item) => (
+            <motion.div
+              key={item.company + item.date}
+              className="group py-1 transition-colors"
+              whileHover={{ scale: 1.05 }}
+              style={{ transformOrigin: 'left' }}
+            >
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                <p className="font-medium">{item.company}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-0">{item.date}</p>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 italic">{item.title}</p>
+              <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-400 mt-1 space-y-1">
+                {item.description.map((desc, idx) => (
+                  <li key={idx}>{desc}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
       )
     },
@@ -80,7 +84,7 @@ export const sections = [
           ].map((hobby) => (
             <motion.div
               key={hobby.title}
-              className="group p-4 rounded-xl transition-colors"
+              className="group py-1 transition-colors"
               whileHover={{ scale: 1.05 }}
             >
               <div>
