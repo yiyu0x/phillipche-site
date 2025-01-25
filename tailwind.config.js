@@ -44,20 +44,9 @@ export default {
       variants: ['dark']
     },
 
-    // Skill badge colors
+    // Project tech tag colors - solid backgrounds
     {
-      pattern: /bg-(teal|blue|green|red|yellow|amber)-500/,
-      variants: ['hover', 'dark']
-    },
-    {
-      pattern: /bg-(teal|blue|green|red|yellow|amber)-600/,
-      variants: ['hover', 'dark']
-    },
-
-    // Learning progress colors
-    {
-      pattern: /bg-(amber|purple|rose)-[45]00/,
-      variants: ['dark']
+      pattern: /bg-(blue|cyan|green|emerald|sky|purple|neutral|indigo|violet|amber|red|yellow|black|orange)-500/,
     },
 
     // Nav bubble colors

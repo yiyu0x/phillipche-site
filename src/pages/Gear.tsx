@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { usePageTitle } from '../hooks/usePageTitle';
+import { FadeInSection } from '../utils/FadeInSection';
 
 interface GearItem {
   category: string;
@@ -102,33 +103,21 @@ const Gear = () => {
 
   return (
     <div>
-      <motion.h1 
-        className="text-3xl font-bold"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        Gear
-      </motion.h1>
-      <motion.p
-        className="text-sm sm:text-base leading-relaxed mb-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        What I use.
-      </motion.p>
-      <div className="space-y-16">
-        {gearList.map((section, sectionIndex) => (
-          <motion.div
-            key={section.category}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: sectionIndex * 0.1 }}
-          >
-            <h2 className="text-lg font-medium">{section.category}</h2>
+      <FadeInSection>
+        <motion.h1 className="text-3xl font-bold">
+          Gear
+        </motion.h1>
+        <motion.p className="text-sm sm:text-base leading-relaxed mb-6">
+          What I use.
+        </motion.p>
+      </FadeInSection>
+
+      <div className="space-y-8">
+        {gearList.map((category, index) => (
+          <FadeInSection key={category.category} delay={index * 0.2}>
+            <h2 className="text-lg font-medium">{category.category}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {section.items.map((item, itemIndex) => (
+              {category.items.map((item, itemIndex) => (
                 <motion.a
                   key={item.name}
                   href={item.link}
@@ -142,7 +131,7 @@ const Gear = () => {
                   }}
                   transition={{
                     duration: 0.3,
-                    delay: sectionIndex * 0.1 + itemIndex * 0.05
+                    delay: index * 0.1 + itemIndex * 0.05
                   }}
                   onHoverStart={() => setHoveredItem(item.name)}
                   onHoverEnd={() => setHoveredItem(null)}
@@ -211,7 +200,7 @@ const Gear = () => {
                 </motion.a>
               ))}
             </div>
-          </motion.div>
+          </FadeInSection>
         ))}
       </div>
     </div>
