@@ -126,7 +126,6 @@ const YouTubeLatest = () => {
   const [latestVideo, ...previousVideos] = videos;
 
   return (
-    <FadeIn>
       <div className="space-y-6">
         {/* Latest Video Header with Stats for Desktop */}
         <div>
@@ -186,11 +185,12 @@ const YouTubeLatest = () => {
             </div>
           )}
         </div>
-
+        <FadeIn>
         {/* Previous Videos Carousel */}
         <VideoCarousel videos={previousVideos} visibleCount={4} />
+        </FadeIn>
       </div>
-    </FadeIn>
+    
   );
 };
 

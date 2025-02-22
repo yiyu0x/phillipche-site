@@ -42,13 +42,23 @@ const SpotifyPlaying = () => {
 
   const handleTabClick = (type: TrackListType) => {
     setActiveList(type);
-    // Smooth scroll to tracks section
-    setTimeout(() => {
-      tracksRef.current?.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }, 100); // Small delay to ensure content has updated
+    
+    // Check if tracks section is not fully visible
+    if (tracksRef.current) {
+      const rect = tracksRef.current.getBoundingClientRect();
+      const isFullyVisible = (
+        rect.top >= 0 &&
+        rect.bottom <= window.innerHeight
+      );
+      
+      // Only scroll if not fully visible
+      if (!isFullyVisible) {
+        tracksRef.current.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'nearest' // Changed from 'start' to 'nearest'
+        });
+      }
+    }
   };
 
   return (

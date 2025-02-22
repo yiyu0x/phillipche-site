@@ -14,7 +14,7 @@ interface VideoCarouselProps {
   visibleCount?: number;
 }
 
-const VideoCarousel = ({ videos, visibleCount = 4 }: VideoCarouselProps) => {
+export const VideoCarousel = ({ videos, visibleCount = 4 }: VideoCarouselProps) => {
   const { currentTheme } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemWidth, setItemWidth] = useState(0);
@@ -46,22 +46,24 @@ const VideoCarousel = ({ videos, visibleCount = 4 }: VideoCarouselProps) => {
   return (
     <div className="relative hidden sm:block">
       <div className="overflow-hidden px-0 relative">
-        {/* Left fade gradient */}
+        {/* Left fade gradient - removed transition from parent div */}
         <div
-          className={`absolute left-0 top-0 bottom-0 w-16 z-10 transition-opacity duration-300 ${
+          className={`absolute left-0 top-0 bottom-0 w-16 z-10 ${
             currentIndex > 0 ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
-            background: `linear-gradient(to right, ${currentTheme.bg.primary}, transparent)`
+            background: `linear-gradient(to right, ${currentTheme.bg.primary}, transparent)`,
+            transition: 'opacity 0.3s ease' // Moved transition here
           }}
         />
-        {/* Right fade gradient */}
+        {/* Right fade gradient - removed transition from parent div */}
         <div
-          className={`absolute right-0 top-0 bottom-0 w-16 z-10 transition-opacity duration-300 ${
+          className={`absolute right-0 top-0 bottom-0 w-16 z-10 ${
             currentIndex < videos.length - visibleCount ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
-            background: `linear-gradient(to left, ${currentTheme.bg.primary}, transparent)`
+            background: `linear-gradient(to left, ${currentTheme.bg.primary}, transparent)`,
+            transition: 'opacity 0.3s ease' // Moved transition here
           }}
         />
 
