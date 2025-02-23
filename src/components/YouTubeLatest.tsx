@@ -78,8 +78,7 @@ const YouTubeLatest = () => {
 
           const duration = videoDetailsResponse.data.items[0].contentDetails.duration;
           const durationInSeconds = parseDuration(duration);
-
-          if (durationInSeconds > 60) {
+          if (durationInSeconds > 61) {
             longFormVideos.push({
               id: videoId,
               title: item.snippet.title,

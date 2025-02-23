@@ -69,7 +69,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="">
+    <footer className="mb-5">
       <div className="container-width">
         <div className="flex flex-col items-center justify-center space-y-3">
           <div className="flex flex-wrap items-center justify-center gap-6 px-4">
