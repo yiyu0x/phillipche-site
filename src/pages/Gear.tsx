@@ -16,8 +16,7 @@ interface GearItem {
 const Gear = () => {
   usePageTitle('Gear');
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const gearList: GearItem[] = [
-    {
+  const gearList: GearItem[] = [    {
       category: "Desk",
       items: [
         {
@@ -96,6 +95,17 @@ const Gear = () => {
           description: "Smart LED Lighting",
           link: "https://amzn.to/3OUIZq3",
           image: "https://m.media-amazon.com/images/I/615Yog6t9nL._AC_SL1500_.jpg"
+        },
+      ]
+    },
+    {
+      category: "Filming",
+      items: [
+        {
+          name: "DJI Osmo Pocket 3",
+          description: "Vlogging Camera",
+          link: "https://amzn.to/41SeTtf",
+          image: "https://m.media-amazon.com/images/I/61tukvVUMiL._AC_SL1500_.jpg"
         },
       ]
     }
