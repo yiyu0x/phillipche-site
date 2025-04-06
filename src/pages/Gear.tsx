@@ -37,6 +37,12 @@ const Gear = () => {
           link: "",
           image: "https://nuphy.com/cdn/shop/products/1f3323eb614d2f555af2d3389095e80d_1800x1800.jpg?v=1683601170"
         },
+        {
+          name: "BenQ PD2705U",
+          description: "Designed to match the MacBook seamlessly, with perfectly consistent colors",
+          link: "",
+          image: "https://manuals.plus/wp-content/uploads/2023/11/BenQ-PD2705U-Mac-Ready-Monitor-featured.png"
+        },
       ]
     },
     {
@@ -46,19 +52,13 @@ const Gear = () => {
           name: "VSCode",
           description: "Must-haves for any engineer",
           link: "",
-          image: "https://code.visualstudio.com/assets/images/code-stable.png"
-        },
-        {
-          name: "Telegram",
-          description: "My go-to messaging app",
-          link: "",
-          image: "https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
+          image: "https://cdn.iconscout.com/icon/premium/png-256-thumb/vscode-11797018-9632817.png?f=webp"
         },
         {
           name: "Heptabase",
-          description: "A super low-distraction learning platform that helps me really distill my thoughts",
+          description: "A super low-distraction learning platform",
           link: "",
-          image: "https://media.licdn.com/dms/image/v2/C560BAQEacTF-68gvvw/company-logo_200_200/company-logo_200_200/0/1637128292902/projectmeta_logo?e=2147483647&v=beta&t=NZJFriQcyIdH-kdmLjGWdfV2AGNVo0obCWDV-GoP8c0"
+          image: "https://wiki.heptabase.com/img/logo.svg"
         },
         // Add other PC components...
       ]

@@ -48,11 +48,18 @@ export const sections = [
       content: (
         <div className="space-y-4 mb-8">
           {[
+            // {
+            //   company: "Amazon",
+            //   date: "2025 - 2025",
+            //   title: "SDE Intern",
+            //   description: ["Incoming internship"],
+            //   dotColor: "bg-blue-500"
+            // },
             {
-              company: "Amazon",
-              date: "2025 - 2025",
-              title: "SDE Intern",
-              description: ["Incoming internship"],
+              company: "University of California, Irvine",
+              date: "2024 - 2025",
+              title: "Master of Software Engineering",
+              description: ["Pursuing a Master's degree in Software Engineering"],
               dotColor: "bg-blue-500"
             },
             {
