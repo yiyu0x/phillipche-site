@@ -19,12 +19,16 @@ const FadeInSection = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+const filteredSections = sections.filter(
+  (section) => section.title !== 'Projects' && section.title !== 'Hobbies'
+);
+
 export const AboutSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <div className="space-y-6">
-      {sections.map((section, index) => (
+      {filteredSections.map((section, index) => (
         <FadeInSection key={section.title}>
           <motion.section
             className="space-y-1 rounded-xl overflow-hidden cursor-default"
@@ -73,4 +77,4 @@ export const AboutSection = () => {
       ))}
     </div>
   );
-}; 
+};

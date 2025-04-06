@@ -29,8 +29,8 @@ const Navbar = () => {
           {/* Added Logo/Icon */}
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="https://raw.githubusercontent.com/phillip-che/phillipche-site/refs/heads/main/src/assets/icon/transparent.png" 
-              alt="Phillip Che" 
+              src="https://avatars.githubusercontent.com/u/29070279?v=4" 
+              alt="Kyle Chang" 
               className="w-8 h-8"
             />
           </Link>

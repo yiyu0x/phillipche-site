@@ -50,30 +50,30 @@ export const sections = [
           {[
             {
               company: "Amazon",
-              date: "2024 - Now",
-              title: "Software Development Engineer",
-              description: ["working on large scale messaging systems"],
+              date: "2025 - 2025",
+              title: "SDE Intern",
+              description: ["Incoming internship"],
               dotColor: "bg-blue-500"
             },
             {
-              company: "California State Polytechnic University, Pomona",
-              date: "2020 - 2024",
-              title: "B.S. Computer Science",
-              description: ["got my degree to make my parents proud"],
-              dotColor: "bg-amber-300"
-            },
-            {
-              company: "Amazon",
-              date: "2023 - 2023",
-              title: "Software Development Engineer Intern",
-              description: ["worked on amazon fresh grocery experience"],
+              company: "Amazon Web Services",
+              date: "2022 - 2024",
+              title: "Cloud Support Engineer",
+              description: ["Resolved intricate issues within customers' AWS EKS environments, mitigating immediate product impact"],
               dotColor: "bg-green-500"
             },
             {
-              company: "Solace Notify",
-              date: "2019 - 2023",
-              title: "Founder",
-              description: ["built reselling community and developed tools"],
+              company: "National Yang Ming Chiao Tung University",
+              date: "2020 - 2022",
+              title: "Master of Science in Computer Science",
+              description: ["Built on-premise Kubernetes platforms (300+ Pods) with observability features at Computer Center, Department of Computer Science (CSIT)"],
+              dotColor: "bg-amber-300"
+            },
+            {
+              company: "LINE",
+              date: "2020 - 2020",
+              title: "SRE Intern",
+              description: ["Consolidated Metrics, Logging, and Tracing on one platform to highlight the power of observability"],
               dotColor: "bg-red-500"
             }
           ].map((item) => (

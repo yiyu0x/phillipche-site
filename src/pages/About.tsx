@@ -27,7 +27,7 @@ const About = () => {
           About
         </motion.h1>
         <motion.p className="text-sm sm:text-base leading-relaxed mb-6">
-          Who I am.
+          📚 You can’t connect the dots looking forward; you can only connect them looking backwards
         </motion.p>
       </FadeInSection>
 

@@ -17,99 +17,57 @@ const Gear = () => {
   usePageTitle('Gear');
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const gearList: GearItem[] = [    {
-      category: "Desk",
+      category: "Hardware",
       items: [
         {
-          name: "MacBook Pro 16\" Space Black",
-          description: "M3 Max, 48GB RAM, 1TB SSD",
-          link: "https://amzn.to/3BxFN0n",
-          image: "https://m.media-amazon.com/images/I/61lsexTCOhL._AC_SL1500_.jpg"
+          name: "MacBook Pro 14\" M4",
+          description: "I’ve been using Macbook for more than a decade now",
+          link: "",
+          image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp14-spaceblack-select-202410?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1728916305295"
         },
         {
-          name: "GIGABYTE M27QX",
-          description: "27\" 240Hz Gaming Monitor",
-          link: "https://amzn.to/3OGJS5r",
-          image: "https://m.media-amazon.com/images/I/71AZi0FMQlL._AC_SL1500_.jpg"
+          name: "Bose QC Ultra",
+          description: "Solid noise-canceling helps me lock in and focus way quicker",
+          link: "",
+          image: "https://assets.bosecreative.com/transform/13204ad8-30eb-4305-aa84-f6c74e3f2228/QCUH_SF_PDP_Gallery_WhiteSmoke_x2_1?quality=90&io=width:816,height:667,transform:fit&io=width:816,height:667,transform:fit"
         },
         {
-          name: "Standing Desk",
-          description: "Flexispot EC3/EC4",
-          link: "https://www.flexispot.com/electric-height-adjustable-standing-desk-dual-motor-economical-option-ec3-ec4",
-          image: "https://image.springbeetle.com/cdn-cgi/image/dpr=1,format=webp,fit=pad/https://s3.springbeetle.com/prod-us2-bucket/trantor/attachments/US/E5-A-main-picture-20240618 (1).jpg"
-        },
-        {
-          name: "Steelcase Leap V2",
-          description: "Ergonomic Office Chair",
-          link: "https://amzn.to/4f9kTCt",
-          image: "https://m.media-amazon.com/images/I/61i+9jRM60L._AC_SL1500_.jpg"
+          name: "NuPhy Halo75 V2",
+          description: "A mechanical keyboard that plays really nice with macOS",
+          link: "",
+          image: "https://nuphy.com/cdn/shop/products/1f3323eb614d2f555af2d3389095e80d_1800x1800.jpg?v=1683601170"
         },
       ]
     },
     {
-      category: "PC Build",
+      category: "Software",
       items: [
         {
-          name: "AMD Ryzen 7 7800X3D",
-          description: "8-Core CPU",
-          link: "https://amzn.to/3BvamUk",
-          image: "https://m.media-amazon.com/images/I/51HqC0rU9HL._AC_SL1500_.jpg"
+          name: "VSCode",
+          description: "Must-haves for any engineer",
+          link: "",
+          image: "https://code.visualstudio.com/assets/images/code-stable.png"
         },
         {
-          name: "ASUS DUAL OC RTX 4070",
-          description: "Graphics Card",
-          link: "https://amzn.to/3VFob9v",
-          image: "https://m.media-amazon.com/images/I/81aLFs6DwgL._AC_SX466_.jpg"
+          name: "Telegram",
+          description: "My go-to messaging app",
+          link: "",
+          image: "https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
         },
         {
-          name: "Lian Li A4-H20",
-          description: "Mini ITX Case",
-          link: "https://amzn.to/3ZyQfNb",
-          image: "https://m.media-amazon.com/images/I/71wYP5rp36L._AC_SL1200_.jpg"
+          name: "Heptabase",
+          description: "A super low-distraction learning platform that helps me really distill my thoughts",
+          link: "",
+          image: "https://media.licdn.com/dms/image/v2/C560BAQEacTF-68gvvw/company-logo_200_200/company-logo_200_200/0/1637128292902/projectmeta_logo?e=2147483647&v=beta&t=NZJFriQcyIdH-kdmLjGWdfV2AGNVo0obCWDV-GoP8c0"
         },
         // Add other PC components...
       ]
-    },
-    {
-      category: "Peripherals",
-      items: [
-        {
-          name: "Razer Viper V3 Pro",
-          description: "Wireless Gaming Mouse",
-          link: "https://amzn.to/4gmNrcJ",
-          image: "https://m.media-amazon.com/images/I/619xpFKAXPL._AC_SL1500_.jpg"
-        },
-        {
-          name: "FIFINE Gaming Mic Kit",
-          description: "XLR/USB Microphone",
-          link: "https://amzn.to/4g4Ko9i",
-          image: "https://m.media-amazon.com/images/I/71ghbks6o1L._AC_SL1500_.jpg"
-        },
-        {
-          name: "HUANUO Dual Monitor Arm",
-          description: "Monitor Mount",
-          link: "https://amzn.to/3CYbDUg",
-          image: "https://m.media-amazon.com/images/I/61CcipLafUL._AC_SL1280_.jpg"
-        },
-        {
-          name: "Govee RGB Floor Lamp",
-          description: "Smart LED Lighting",
-          link: "https://amzn.to/3OUIZq3",
-          image: "https://m.media-amazon.com/images/I/615Yog6t9nL._AC_SL1500_.jpg"
-        },
-      ]
-    },
-    {
-      category: "Filming",
-      items: [
-        {
-          name: "DJI Osmo Pocket 3",
-          description: "Vlogging Camera",
-          link: "https://amzn.to/41SeTtf",
-          image: "https://m.media-amazon.com/images/I/61tukvVUMiL._AC_SL1500_.jpg"
-        },
-      ]
     }
   ];
+
+  const filteredGearList = gearList.filter(
+    (category) => category.category !== 'Filming' && category.category !== 'Peripherals'
+  );
 
   return (
     <div>
@@ -118,12 +76,12 @@ const Gear = () => {
           Gear
         </motion.h1>
         <motion.p className="text-sm sm:text-base leading-relaxed mb-6">
-          What I use.
+          🔧 You can’t do a good job without the right tools
         </motion.p>
       </FadeInSection>
 
       <div className="space-y-8">
-        {gearList.map((category, index) => (
+        {filteredGearList.map((category, index) => (
           <FadeInSection key={category.category} delay={index * 0.2}>
             <h2 className="text-lg font-medium">{category.category}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -217,4 +175,4 @@ const Gear = () => {
   );
 };
 
-export default Gear; 
+export default Gear;
